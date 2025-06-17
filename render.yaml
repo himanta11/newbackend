@@ -1,5 +1,8 @@
-name: aspirant-backend
-python_version: 3.11.0
-description: Aspirant backend service
-build_command: python -m pip install -r requirements.txt
-start_command: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+services:
+  - name: aspirant-backend
+    type: web
+    runtime: python
+    pythonVersion: 3.11.0
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free  # or use 'starter', 'standard' if you're on a paid plan
