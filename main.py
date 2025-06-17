@@ -18,7 +18,7 @@ import os
 import json
 from sqlalchemy import text
 import requests
-from together.client import TogetherClient as Together
+from together import TogetherClient as Together
 from dotenv import load_dotenv
 import time
 
