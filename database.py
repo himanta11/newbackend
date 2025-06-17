@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 try:
     # Encode the password properly
     password = quote_plus("zrz6djAcM5fWQuVDwW3HuVEeJ6UmrUI7")
-    DATABASE_URL = f"postgresql://aspirant_user:{password}@dpg-d0uptr3e5dus73a2fapg-a.oregon-postgres.render.com/aspirant"
+    DATABASE_URL = f"postgresql://aspirant_user:{password}@dpg-d0uptr3e5dus73a2fapg-a/aspirant"
     logger.info("Database URL configured")
 
     engine = create_engine(DATABASE_URL)
