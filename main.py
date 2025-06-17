@@ -45,7 +45,7 @@ app.add_middleware(
         "http://localhost:5501",
         "http://127.0.0.1:5501",
         "https://*.netlify.app",
-        "https://*.vercel.app",
+        "https://newfrontend-sage.vercel.app",
         "https://*.github.io",
         "*"  # Allow all origins for testing
     ],
