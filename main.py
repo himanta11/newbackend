@@ -65,10 +65,10 @@ async def startup_event():
 # Load environment variables
 load_dotenv()
 
-# Initialize Together AI client with hardcoded API key
+# Initialize Together AI client
 TOGETHER_API_KEY = "39b58efc9f06bc95aeb6a246badf5561100d6247136a4cd33bc6f2c96cc9d6bf"
 TOGETHER_API_URL = "https://api.together.xyz/v1/completions"
-together_client = together.Client(api_key=TOGETHER_API_KEY)
+together_client = together.Client()
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
