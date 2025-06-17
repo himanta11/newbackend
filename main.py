@@ -22,6 +22,46 @@ from together.client import TogetherClient as Together
 from dotenv import load_dotenv
 import time
 
+# Initialize FastAPI app with CORS configuration
+app = FastAPI(
+    title="Aspirant Backend",
+    description="Backend service for Aspirant application",
+    version="1.0.0"
+)
+
+# Configure CORS with more specific origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:5501",
+        "http://127.0.0.1:5501",
+        "https://*.netlify.app",  # For Netlify deployment
+        "https://*.vercel.app",   # For Vercel deployment
+        "https://*.github.io",    # For GitHub Pages
+        "*"  # Allow all origins for testing
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
+)
+
+# Include routers
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(questions_router, prefix="/questions", tags=["questions"])
+
+# Add startup event
+@app.on_event("startup")
+async def startup_event():
+    # Create database tables
+    Base.metadata.create_all(bind=engine)
+    logger.info("Application started and database initialized")
+
 # Load environment variables
 load_dotenv()
 
@@ -55,32 +95,6 @@ try:
 except Exception as e:
     logger.error(f"Error creating database tables: {str(e)}")
     logger.error(traceback.format_exc())
-
-app = FastAPI()
-
-# Configure CORS
-origins = [
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://localhost:5501",
-    "http://127.0.0.1:5501",
-    "https://*.netlify.app",  # For Netlify deployment
-    "https://*.vercel.app",   # For Vercel deployment
-    "https://*.github.io",    # For GitHub Pages
-    "*"  # Allow all origins for testing
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,
-)
 
 # Create routers
 question_router = APIRouter(prefix="/api/questions", tags=["Questions"])
