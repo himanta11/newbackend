@@ -18,7 +18,7 @@ import os
 import json
 from sqlalchemy import text
 import requests
-from together import TogetherClient as Together
+import together
 from dotenv import load_dotenv
 import time
 
@@ -68,7 +68,7 @@ load_dotenv()
 # Initialize Together AI client with hardcoded API key
 TOGETHER_API_KEY = "39b58efc9f06bc95aeb6a246badf5561100d6247136a4cd33bc6f2c96cc9d6bf"
 TOGETHER_API_URL = "https://api.together.xyz/v1/completions"
-together_client = Together(api_key=TOGETHER_API_KEY)
+together_client = together.Client(api_key=TOGETHER_API_KEY)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
