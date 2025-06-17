@@ -1,8 +1,10 @@
 services:
-  - name: aspirant-backend
-    type: web
+  - type: web
+    name: aspirant-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     runtime: python
+    region: oregon
     pythonVersion: 3.11.0
-    buildCommand: python -m pip install -r requirements.txt
-    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
-    plan: free  # or use 'starter', 'standard' if you're on a paid plan
