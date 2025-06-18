@@ -61,7 +61,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # API Configuration
-TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY", "your-default-api-key")
+TOGETHER_API_KEY = "39b58efc9f06bc95aeb6a246badf5561100d6247136a4cd33bc6f2c96cc9d6bf"
 TOGETHER_API_URL = "https://api.together.xyz/v1/completions"
 MAX_RETRIES = 3
 RETRY_DELAY = 1  # seconds
