@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Learning Plan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f7;
+            margin: 0;
+            padding: 10px;
+        }
+        
+        .pricing-card {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(94, 23, 235, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #ff86eb, #5e17eb);
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+        
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .plan-description {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .price-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .price-currency {
+            font-size: 16px;
+            margin-top: 8px;
+            margin-right: 5px;
+        }
+        
+        .price-amount {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        
+        .price-original {
+            font-size: 16px;
+            margin-top: 18px;
+            margin-left: 5px;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .price-period {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .card-features {
+            background-color: #f8f9fa;
+            padding: 25px;
+        }
+        
+        .features-title {
+            color: #2d2d3a;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .feature-icon {
+            color: #b3f461;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .feature-text {
+            font-size: 14px;
+            color: #2d2d3a;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #5e17eb, #3a0b9b);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #4a13c2, #2e0985);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+        }
+        
+        .popular-badge {
+            background-color: #b3f461;
+            color: #2d2d3a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-card">
+        <div class="card-header">
+            <div class="popular-badge">MOST POPULAR</div>
+            <div class="plan-name">Premium Plan</div>
+            <div class="plan-description">Unlock your full learning potential</div>
+            
+            <div class="price-container">
+                <span class="price-currency">₹</span>
+                <span class="price-amount">99</span>
+                <span class="price-original">₹300</span>
+            </div>
+            <div class="price-period" style="font-size: 16px; font-weight: 500;">for first 3 months</div>
+        </div>
+        
+        <div class="card-features">
+            <div class="features-title">Everything included:</div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">Unlimited reel scroll with AI explanations</div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">Unlimited PYQs of all courses</div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">3 mock tests per week</div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">Weak areas detection & performance analysis by AI</div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">AI chat functionality for understanding topics</div>
+            </div>
+            
+            <button class="cta-button">Upgrade to Pro</button>
+        </div>
+    </div>
+</body>
+</html>

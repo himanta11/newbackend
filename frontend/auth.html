@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #6c5ce7;
+            --pink: #ff86eb;
+            --green: #b3f461;
+            --dark: #2d2d3a;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 134, 235, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(179, 244, 97, 0.1) 0%, transparent 20%);
+        }
+        
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(45, 45, 58, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .form-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .form-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .form-input:focus {
+            border-color: var(--purple);
+            outline: none;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(94, 23, 235, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #aaa;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .password-toggle:hover {
+            color: var(--purple);
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--dark);
+        }
+        
+        .form-switch a {
+            color: var(--purple);
+            font-weight: 500;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+        
+        .form-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Toggle between login/signup */
+        #signup-form {
+            display: none;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-footer { animation: fadeIn 0.5s 0.4s ease-out forwards; }
+        .submit-btn { animation: fadeIn 0.5s 0.5s ease-out forwards; }
+        .form-switch { animation: fadeIn 0.5s 0.6s ease-out forwards; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 400px) {
+            .form-container {
+                max-width: 100%;
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .form-header {
+                padding: 20px;
+            }
+
+            .form-title {
+            font-size: 24px;
+        }
+        
+            .form-subtitle {
+                font-size: 12px;
+            }
+
+            .form-body {
+            padding: 20px;
+            }
+
+            .form-label {
+                font-size: 13px;
+            }
+
+            .form-input {
+                padding: 12px;
+            font-size: 14px;
+            }
+
+            .form-footer {
+                font-size: 12px;
+            margin-top: 15px;
+            }
+
+            .submit-btn {
+                padding: 12px;
+                font-size: 14px;
+                margin-top: 15px;
+            }
+
+            .form-switch {
+            font-size: 12px;
+                margin-top: 15px;
+            }
+
+            .password-toggle {
+                top: 38px;
+                right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Login Form -->
+        <form id="login-form">
+            <div class="form-header">
+                <h1 class="form-title">Welcome Back!</h1>
+                <p class="form-subtitle">Login to continue your learning journey</p>
+                </div>
+            
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="Enter your email" required>
+            </div>
+                
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+                    <span class="password-toggle" onclick="togglePassword('login-password')">👁️</span>
+                </div>
+                
+                <div class="form-footer">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+    </div>
+    
+                <button type="submit" class="submit-btn">Login</button>
+                
+                <div class="form-switch">
+                    Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+                    </div>
+                </div>
+        </form>
+        
+        <!-- Signup Form -->
+        <form id="signup-form">
+            <div class="form-header">
+                <h1 class="form-title">Create Account</h1>
+                <p class="form-subtitle">Join us to start your learning adventure</p>
+                </div>
+                
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="signup-username" class="form-label">Username</label>
+                    <input type="text" id="signup-username" class="form-input" placeholder="Choose a username" required>
+            </div>
+            
+                <div class="form-group">
+                    <label for="signup-email" class="form-label">Email Address</label>
+                    <input type="email" id="signup-email" class="form-input" placeholder="Enter your email" required>
+            </div>
+            
+                <div class="form-group">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <input type="password" id="signup-password" class="form-input" placeholder="Create a password" required>
+                    <span class="password-toggle" onclick="togglePassword('signup-password')">👁️</span>
+            </div>
+            
+                <div class="form-group">
+                    <label for="confirm-password" class="form-label">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-input" placeholder="Confirm your password" required>
+                    <span class="password-toggle" onclick="togglePassword('confirm-password')">👁️</span>
+        </div>
+        
+                <button type="submit" class="submit-btn">Sign Up</button>
+                
+                <div class="form-switch">
+                    Already have an account? <a href="#" onclick="showLogin()">Login</a>
+                </div>
+                </div>
+        </form>
+    </div>
+
+    <script>
+        // Toggle between login and signup forms
+        function showSignup() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+        
+        function showLogin() {
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+        
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const toggle = input.nextElementSibling;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.textContent = '👁️‍🗨️';
+            } else {
+                input.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        // Login form submission
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                console.log('Attempting login with:', { email });
+                const response = await fetch('https://newbackend-1-735d.onrender.com/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        'username': email,  // Use email as username for login
+                        'password': password
+                    })
+                });
+
+                console.log('Login response status:', response.status);
+                const data = await response.json();
+                console.log('Login response data:', data);
+
+                if (response.ok) {
+                    localStorage.setItem('authToken', data.access_token);
+                    window.location.replace('home.html');
+                } else {
+                    alert(data.detail || 'Invalid email or password');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred during login. Please make sure the server is running at https://aspirant-backend-7at6.onrender.com');
+            }
+        });
+
+        // Signup form submission
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long');
+                return;
+            }
+
+            if (!username || username.length < 3) {
+                alert('Username must be at least 3 characters long');
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            try {
+                console.log('Attempting signup with:', { username, email });
+                const response = await fetch('https://newbackend-1-735d.onrender.com/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        username: username,
+                        email: email, 
+                        password: password 
+                    })
+                });
+
+                console.log('Signup response status:', response.status);
+                const data = await response.json();
+                console.log('Signup response data:', data);
+
+                if (response.ok) {
+                    // After successful signup, try to login automatically
+                    const loginResponse = await fetch('https://newbackend-1-735d.onrender.com/token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            'username': email,  // Use email for login
+                            'password': password
+                        })
+                    });
+
+                    if (loginResponse.ok) {
+                        const loginData = await loginResponse.json();
+                        localStorage.setItem('authToken', loginData.access_token);
+                        window.location.replace('home.html');
+                    } else {
+                        alert('Signup successful but automatic login failed. Please try logging in manually.');
+                    }
+                } else {
+                    alert(data.detail || 'Signup failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Signup error:', error);
+                alert('An error occurred during signup. Please make sure the server is running at https://newbackend-1-735d.onrender.com');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+name: aspirant-backend
+python_version: "3.11.0"
+description: Aspirant backend service
+build_command: python3.11 -m pip install -r requirements.txt
+working_directory: backend
+start_command: python3.11 -m uvicorn main:app --host 0.0.0.0 --port $PORT
+environment:
+  PYTHONPATH: /opt/render/project/src/backend
+  PATH: "$PATH:/opt/render/project/src/backend"
